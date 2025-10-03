@@ -1,0 +1,550 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Peixateria Víctor — Pescado fresco cada día</title>
+  <meta name="description" content="Pescadería tradicional. Pescado de lonja cada día. Pedidos por WhatsApp. Calle Jacinto Verdaguer 131." />
+
+  <!-- Fuente -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700;800&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome (iconos) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+
+  <style>
+    :root{
+      --primary: #023e5f;     /* azul oscuro */
+      --accent: #00bcd4;      /* aqua */
+      --bg: linear-gradient(180deg,#eaf7fb 0%, #dff6fb 100%);
+      --muted: #6b7c86;
+      --card: #ffffff;
+      --maxw: 1200px;
+      --radius: 12px;
+      --shadow-lg: 0 10px 30px rgba(2,46,63,0.12);
+    }
+
+    *,*::before,*::after{box-sizing:border-box}
+
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: 'Montserrat', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: var(--bg);
+      color: var(--primary);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+    }
+
+    /* Header */
+    header{
+      position: sticky;
+      top:0;
+      z-index:100;
+      background: rgba(255,255,255,0.66);
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid rgba(2,56,89,0.06);
+    }
+    .header-inner{
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 0.7rem 1rem;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:1rem;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap: 12px;
+      text-decoration:none;
+      color:var(--primary);
+    }
+    .brand img{height:48px; width:auto; display:block}
+    .brand .title{
+      font-weight:800;
+      font-size: clamp(1rem, 1.8vw, 1.4rem);
+      letter-spacing:1px;
+    }
+    nav { display:flex; gap: 12px; align-items:center; }
+    .nav-link{
+      font-weight:500; color:var(--primary); text-decoration:none;
+      padding:8px 12px; border-radius:8px;
+    }
+    .nav-link:hover{ background: rgba(2,62,94,0.06) }
+
+    /* decorative repeated logos (light, behind header) */
+    .logo-strip{
+      pointer-events:none;
+      position:absolute;
+      inset:0;
+      z-index:0;
+      background-image: url('fotos/LOGO.png');
+      background-repeat: repeat-x;
+      background-position: center left;
+      background-size: auto 48px; /* height of repeated logos */
+      opacity: 0.06;
+    }
+
+    /* Hero */
+    .hero{
+      position:relative;
+      width:100%;
+      background-image: url('fotos/Inicio_home.jpeg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      /* Sitúa la imagen verticalmente relativo al centro y la sube 0.7vh */
+      background-position: center calc(20% - 1vh);
+      aspect-ratio: 16 / 6; /* responsive height without media queries */
+      display:flex;
+      align-items:flex-end;
+      justify-content:center;
+      margin-bottom: clamp(1rem, 2vw, 2rem);
+      overflow:hidden;
+    }
+    .hero::after{
+      content:"";
+      position:absolute; inset:0;
+      background: linear-gradient(180deg, rgba(2,62,94,0.12) 0%, rgba(2,62,94,0.32) 100%);
+    }
+    .hero-card{
+      position:relative;
+      z-index:1;
+      width:min(92%, 820px);
+      text-align:center;
+      color: #fff;
+      margin-bottom: clamp(0.6rem, 2.6vw, 2.2rem);
+      padding: clamp(0.8rem, 2vw, 1.6rem);
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(0,0,0,0.18), rgba(0,0,0,0.06));
+      box-shadow: var(--shadow-lg);
+      backdrop-filter: blur(4px);
+    }
+    .hero-card h1{
+      margin:0;
+      font-size: clamp(1.2rem, 3vw, 2.6rem);
+      letter-spacing: 1px;
+    }
+    .hero-card p{ margin: 0.6rem 0 0; font-weight:500; color:rgba(255,255,255,0.92) }
+
+    .btn {
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      margin-top:0.8rem;
+      padding:0.6rem 1rem;
+      border-radius: 10px;
+      text-decoration:none;
+      font-weight:700;
+      color: #012b32;
+      background: var(--accent);
+      box-shadow: 0 6px 18px rgba(0,188,212,0.14);
+    }
+
+    /* Container */
+    .container{
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: clamp(0.8rem, 2.5vw, 1.8rem);
+      display:block;
+    }
+
+    /* Section cards fluid layout (no media queries) */
+    .card{
+      display:flex;
+      gap: clamp(1rem, 2.2vw, 2rem);
+      align-items:stretch;
+      flex-wrap:wrap; /* stacks naturally on small widths */
+      margin-bottom: clamp(1rem, 2.8vw, 2.4rem);
+      background: var(--card);
+      padding: clamp(0.8rem, 2vw, 1.4rem);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-lg);
+      overflow:hidden;
+    }
+    .card .media{
+      flex: 1 1 min(300px, 42%); /* fluid: will shrink and then wrap */
+      min-width: 220px;
+      aspect-ratio: 4 / 3;
+      border-radius: 8px;
+      overflow:hidden;
+      background: #f3fbfc;
+      display:block;
+    }
+    .card .media img{
+      width:100%; height:100%; object-fit:cover; display:block;
+    }
+    .card .content{
+      flex: 1 1 min(260px, 52%);
+      min-width: 220px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      gap:0.6rem;
+    }
+    h2{ color:var(--primary); margin:0; font-size: clamp(1.1rem, 2.4vw, 1.8rem) }
+    p{ color:var(--muted); margin:0; font-size: clamp(0.95rem, 1.6vw, 1.06rem) }
+
+    .direccion { font-weight:700; color:var(--primary); font-size: clamp(1rem,1.8vw,1.2rem) }
+    .info-box{ margin-top:0.6rem; padding:0.7rem; border-radius:10px; background:#f5fcfd; border:2px solid var(--accent) }
+
+    /* Iconos contacto */
+    .icon-row{ display:flex; gap: 12px; align-items:center; flex-wrap:wrap; margin-top:0.8rem }
+    .icon{
+      display:inline-flex; align-items:center; justify-content:center;
+      width:44px; height:44px; border-radius:10px;
+      background:#f0fbfc; color:var(--primary); text-decoration:none;
+      box-shadow: 0 6px 18px rgba(2,62,94,0.04);
+    }
+    .whatsapp-info{ font-weight:600; color:var(--primary) }
+
+    /* Carousel base */
+    .carousel{
+      position:relative;
+      width:100%;
+      overflow:hidden;
+      border-radius:10px;
+    }
+    .carousel-track{
+      display:flex;
+      transition: transform 450ms cubic-bezier(.22,.9,.32,1);
+      will-change: transform;
+    }
+    .carousel-track > * { flex: 0 0 100%; width:100%; }
+    .carousel img{ width:100%; height:100%; object-fit:cover; display:block }
+
+    .carousel-button{
+      position:absolute;
+      top:50%;
+      transform:translateY(-50%);
+      background: rgba(2,62,94,0.75);
+      color:#fff; border: none;
+      width:40px; height:40px; border-radius:50%;
+      display:inline-flex; align-items:center; justify-content:center;
+      cursor:pointer; z-index:4;
+    }
+    .carousel-button:disabled{ opacity:0.25; cursor:default }
+    .carousel-button.left{ left:10px }
+    .carousel-button.right{ right:10px }
+
+    .dots{
+      position:absolute; bottom:10px; left:50%; transform:translateX(-50%);
+      display:flex; gap:8px; z-index:5;
+    }
+    .dot{
+      width:10px; height:10px; border-radius:50%;
+      background: rgba(255,255,255,0.6); border:2px solid rgba(2,62,94,0.08);
+      cursor:pointer;
+    }
+    .dot.active{ background: var(--accent); }
+
+    /* Floating WhatsApp CTA */
+    .whatsapp-fab{
+      position:fixed;
+      right:18px;
+      bottom:18px;
+      z-index:120;
+      display:inline-flex; gap:10px; align-items:center;
+      padding:10px 14px; border-radius: 999px; background:var(--accent);
+      color:#012b32; font-weight:800; text-decoration:none;
+      box-shadow: 0 12px 30px rgba(0,188,212,0.18);
+    }
+
+    footer{
+      max-width: var(--maxw);
+      margin: 1.2rem auto;
+      padding: 1rem;
+      color:var(--muted);
+      font-size:0.95rem;
+      text-align:center;
+    }
+
+    /* small helper */
+    .muted{ color:var(--muted) }
+  </style>
+</head>
+<body>
+
+  <header aria-label="Cabecera">
+    <div class="logo-strip" aria-hidden="true"></div>
+
+    <div class="header-inner">
+      <a href="#" class="brand" aria-label="Ir a inicio - Peixateria Víctor">
+        <img src="fotos/LOGO.png" alt="Logo Peixateria Víctor" />
+        <div class="title">Peixateria Víctor</div>
+      </a>
+
+      <nav aria-label="Navegación principal">
+        <a class="nav-link" href="#lonja">Lonja</a>
+        <a class="nav-link" href="#quienes">Quiénes somos</a>
+        <a class="nav-link" href="#donde">Dónde estamos</a>
+        <a class="nav-link" href="#contacto">Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" role="banner" aria-roledescription="imagen principal">
+    <div class="hero-card" role="region" aria-label="Pescado fresco cada día">
+      <h1>Pescado de lonja cada día</h1>
+      <p>Con la experiencia de tres generaciones — directo del mar a tu mesa.</p>
+      <a class="btn" href="https://wa.me/34688895476" target="_blank" rel="noopener noreferrer" aria-label="Pedir por WhatsApp">
+        <i class="fab fa-whatsapp"></i> Pedir por WhatsApp
+      </a>
+    </div>
+  </section>
+
+  <main class="container">
+
+    <!-- Sección: Pescado de lonja -->
+    <section id="lonja" class="card" aria-labelledby="h-lonja">
+      <div class="content">
+        <h2 id="h-lonja">Pescado de Lonja</h2>
+        <p>
+          Hacemos doble visita diaria a la lonja (Barcelona y Blanes) para ofrecer selección del día.
+          Pescado azul como boquerón y sardina traídos a primera hora, seleccionados uno a uno.
+        </p>
+      </div>
+
+      <div class="media">
+        <div class="carousel" data-carousel aria-roledescription="carrusel de imágenes">
+          <div class="carousel-track" role="list">
+            <img loading="lazy" src="fotos/peixllotja.JPG" alt="Selección en la lonja" role="listitem" />
+            <img loading="lazy" src="fotos/peixllotja2.JPG" alt="Pescado fresco 2" role="listitem" />
+            <img loading="lazy" src="fotos/peixllotja3.JPG" alt="Pescado fresco 3" role="listitem" />
+            <img loading="lazy" src="fotos/peixllotja4.JPG" alt="Pescado fresco 4" role="listitem" />
+          </div>
+
+          <button class="carousel-button left" type="button" aria-label="Anterior">
+            <i class="fas fa-chevron-left" aria-hidden="true"></i>
+          </button>
+          <button class="carousel-button right" type="button" aria-label="Siguiente">
+            <i class="fas fa-chevron-right" aria-hidden="true"></i>
+          </button>
+
+          <div class="dots" aria-hidden="true"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sección: Quiénes somos -->
+    <section id="quienes" class="card" aria-labelledby="h-quienes">
+      <div class="media">
+        <div class="carousel" data-carousel>
+          <div class="carousel-track">
+            <img loading="lazy" src="fotos/Hom2.jpeg" alt="Nuestro equipo en la pescadería" />
+            <img loading="lazy" src="fotos/quienes_somos1.png" alt="Tres generaciones Víctor" />
+          </div>
+          <button class="carousel-button left" type="button" aria-label="Anterior"><i class="fas fa-chevron-left" aria-hidden="true"></i></button>
+          <button class="carousel-button right" type="button" aria-label="Siguiente"><i class="fas fa-chevron-right" aria-hidden="true"></i></button>
+          <div class="dots" aria-hidden="true"></div>
+        </div>
+      </div>
+
+      <div class="content">
+        <h2 id="h-quienes">¿Quiénes somos?</h2>
+        <p>
+          Desde 1955, una tradición familiar que se transmite de generación en generación.
+          Seleccionamos nuestro producto con cariño, cercanía y conocimiento del mar.
+        </p>
+        <p class="muted">Atención personalizada y recomendaciones para cocinar cada pieza.</p>
+      </div>
+    </section>
+
+    <!-- Sección: Dónde estamos -->
+    <section id="donde" class="card" aria-labelledby="h-donde">
+      <div class="content">
+        <h2 id="h-donde">¿Dónde estamos?</h2>
+        <div class="direccion">Calle Jacinto Verdaguer 131 — Parada 30</div>
+
+        <div class="info-box">
+          <strong>Horarios de apertura</strong><br/>
+          Martes - Jueves: 08:00 - 14:00<br/>
+          Viernes: 08:00 - 19:00<br/>
+          Sábados: 08:00 - 15:00
+        </div>
+      </div>
+
+      <div class="media">
+        <img loading="lazy" src="fotos/Donde_estamos.jpeg" alt="Mapa / local de la pescadería" />
+      </div>
+    </section>
+
+    <!-- Contacto -->
+    <section id="contacto" class="card" aria-labelledby="h-contacto">
+      <div class="content">
+        <h2 id="h-contacto">Contacto</h2>
+        <p>¡Síguenos en Instagram o haz tu pedido por WhatsApp!</p>
+
+        <div class="icon-row">
+          <a class="icon" href="https://wa.me/34688895476" target="_blank" rel="noopener noreferrer" aria-label="Abrir WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+          </a>
+          <div class="whatsapp-info">WhatsApp: <span style="margin-left:8px;">688 895 476</span></div>
+
+          <a class="icon" href="https://instagram.com/pescaderiavictor" target="_blank" rel="noopener noreferrer" aria-label="Ir a Instagram">
+            <i class="fab fa-instagram"></i>
+          </a>
+        </div>
+
+        <p style="margin-top:1rem;">
+          ¿Quieres conocer los productos del día o hacer un pedido? Escríbenos por WhatsApp y te ayudamos con consejos y tiempo de frescura.
+        </p>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Floating WhatsApp button -->
+  <a href="https://wa.me/34688895476" target="_blank" rel="noopener noreferrer" class="whatsapp-fab" aria-label="Pedir por WhatsApp">
+    <i class="fab fa-whatsapp" style="font-size:1.25rem"></i>
+    Pedir
+  </a>
+
+  <footer>
+    © Peixateria Víctor — Calle Jacinto Verdaguer 131 — Tel: 688 895 476
+  </footer>
+
+  <!-- JSON-LD: LocalBusiness básico -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Peixateria Víctor",
+    "image": "fotos/LOGO.png",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Calle Jacinto Verdaguer 131",
+      "addressLocality": "Barcelona"
+    },
+    "telephone": "+34688895476",
+    "openingHours": [
+      "Tu-Th 08:00-14:00",
+      "Fr 08:00-19:00",
+      "Sa 08:00-15:00"
+    ]
+  }
+  </script>
+
+  <!-- Carrusel JS reutilizable -->
+  <script>
+    (function(){
+      class Carousel {
+        constructor(el, opts = {}) {
+          this.el = el;
+          this.track = el.querySelector('.carousel-track');
+          this.slides = Array.from(this.track.children);
+          this.prev = el.querySelector('.carousel-button.left');
+          this.next = el.querySelector('.carousel-button.right');
+          this.dotsWrap = el.querySelector('.dots');
+          this.index = 0;
+          this.total = this.slides.length;
+          this.startX = 0;
+          this.currentTranslate = 0;
+          this.isPointerDown = false;
+          this.opts = Object.assign({ autoplay: false, interval: 4000 }, opts);
+
+          this.setUp();
+          this.bind();
+          if (this.opts.autoplay) this.startAutoplay();
+        }
+
+        setUp(){
+          // build dots
+          if (this.dotsWrap) {
+            this.dotsWrap.innerHTML = '';
+            this.slides.forEach((_, i) => {
+              const d = document.createElement('button');
+              d.className = 'dot' + (i===0 ? ' active':'');
+              d.setAttribute('aria-label', 'Ir a imagen ' + (i+1));
+              d.addEventListener('click', ()=> this.goto(i));
+              this.dotsWrap.appendChild(d);
+            });
+          }
+          // ensure first slide visible
+          this.update();
+          // make track focusable for keyboard
+          this.track.tabIndex = 0;
+        }
+
+        bind(){
+          if (this.prev) this.prev.addEventListener('click', ()=> this.prevSlide());
+          if (this.next) this.next.addEventListener('click', ()=> this.nextSlide());
+
+          // keyboard navigation when focus on track
+          this.track.addEventListener('keydown', (e)=> {
+            if (e.key === 'ArrowLeft') this.prevSlide();
+            if (e.key === 'ArrowRight') this.nextSlide();
+          });
+
+          // pointer events for swipe
+          this.track.addEventListener('pointerdown', (e)=> {
+            this.isPointerDown = true;
+            this.startX = e.clientX;
+            this.track.setPointerCapture(e.pointerId);
+          });
+          this.track.addEventListener('pointermove', (e)=> {
+            if (!this.isPointerDown) return;
+            const dx = e.clientX - this.startX;
+            // small translation effect while dragging
+            const percentage = dx / this.el.clientWidth * 100;
+            this.track.style.transition = 'none';
+            this.track.style.transform = `translateX(calc(-${this.index * 100}% + ${percentage}%))`;
+          });
+          this.track.addEventListener('pointerup', (e)=> this.endPointer(e));
+          this.track.addEventListener('pointercancel', (e)=> this.endPointer(e));
+          // prevent image dragging default
+          this.slides.forEach(img => img.addEventListener('dragstart', (ev)=> ev.preventDefault()));
+        }
+
+        endPointer(e){
+          if (!this.isPointerDown) return;
+          this.isPointerDown = false;
+          const dx = e.clientX - this.startX;
+          const threshold = Math.max(40, this.el.clientWidth * 0.12);
+          this.track.style.transition = '';
+          if (dx > threshold) this.prevSlide();
+          else if (dx < -threshold) this.nextSlide();
+          else this.update(); // revert
+        }
+
+        prevSlide(){ this.goto(Math.max(0, this.index -1)) }
+        nextSlide(){ this.goto(Math.min(this.total -1, this.index +1)) }
+
+        goto(i){
+          this.index = i;
+          this.update();
+        }
+
+        update(){
+          this.track.style.transform = `translateX(-${this.index * 100}%)`;
+          if (this.prev) this.prev.disabled = (this.index === 0);
+          if (this.next) this.next.disabled = (this.index === this.total-1);
+          // dots
+          if (this.dotsWrap) {
+            Array.from(this.dotsWrap.children).forEach((d, idx) => d.classList.toggle('active', idx === this.index));
+          }
+        }
+
+        startAutoplay(){
+          this._autoplayId = setInterval(()=> {
+            if (this.index < this.total -1) this.nextSlide();
+            else this.goto(0);
+          }, this.opts.interval);
+          this.el.addEventListener('pointerenter', ()=> clearInterval(this._autoplayId) );
+          this.el.addEventListener('pointerleave', ()=> this.startAutoplay() );
+        }
+      }
+
+      // auto-init all carousels on page
+      document.addEventListener('DOMContentLoaded', ()=> {
+        document.querySelectorAll('[data-carousel]').forEach(el => new Carousel(el, { autoplay: false }) );
+      });
+    })();
+  </script>
+
+</body>
+</html>
